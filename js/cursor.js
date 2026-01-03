@@ -22,3 +22,59 @@ function animateRing() {
 }
 
 animateRing();
+
+const magneticElements = document.querySelectorAll(".card");
+
+magneticElements.forEach(el => {
+  el.addEventListener("mousemove", e => {
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    gsap.to(el, {
+      x: x * 0.15,
+      y: y * 0.15,
+      duration: 0.3,
+      ease: "power3.out"
+    });
+  });
+
+  el.addEventListener("mouseleave", () => {
+    gsap.to(el, {
+      x: 0,
+      y: 0,
+      duration: 0.4,
+      ease: "power3.out"
+    });
+  });
+});
+
+// magneticElements.forEach(el => {
+//   el.addEventListener("mouseenter", () => {
+//     ring.style.transform += " scale(1.4)";
+//   });
+
+//   el.addEventListener("mouseleave", () => {
+//     ring.style.transform = ring.style.transform.replace(" scale(1.4)", "");
+//   });
+// });
+
+magneticElements.forEach(el => {
+  el.addEventListener("mouseenter", () => {
+    gsap.to(ring, {
+      scale: 1.4,
+      duration: 0.3,
+      ease: "power2.out"
+    });
+  });
+
+  el.addEventListener("mouseleave", () => {
+    gsap.to(ring, {
+      scale: 1,
+      duration: 0.3,
+      ease: "power2.out"
+    });
+  });
+});
+
+

@@ -139,6 +139,7 @@ body {
   z-index: 9998;
 }
 
+
 /* SCENE ELEMENT DEFAULT STATES */
 .scene h1,
 .scene h2 {
@@ -152,6 +153,48 @@ body {
   opacity: 0;
   transform: translateY(30px);
 }
+
+/* INTERACTIVE ELEMENTS */
+.card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  will-change: transform;
+}
+
+.card:hover {
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* CURSOR SCALE ON HOVER */
+.card:hover ~ .cursor-ring {
+  transform: scale(1.5);
+}
+
+/* SCENE NAV */
+.scene-nav {
+  position: fixed;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 10;
+}
+
+.scene-nav .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.4);
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.scene-nav .dot.active {
+  background: white;
+  transform: scale(1.4);
+}
+
 
 
 

@@ -82,6 +82,8 @@ fetch("data/tools.json")
 /* ---------------- SCENE SWITCHING ---------------- */
 
 const scenes = document.querySelectorAll(".scene");
+const navDots = document.querySelectorAll(".scene-nav .dot");
+
 let currentScene = 0;
 let isAnimating = false;
 
@@ -89,6 +91,9 @@ function showScene(index, direction) {
   if (isAnimating || index < 0 || index >= scenes.length) return;
 
   isAnimating = true;
+
+  navDots.forEach(dot => dot.classList.remove("active"));
+  navDots[index].classList.add("active");
 
   const current = scenes[currentScene];
   const next = scenes[index];
@@ -176,5 +181,16 @@ gsap.to(".scene.active p", {
   delay: 0.2,
   ease: "power3.out"
 });
+
+navDots.forEach(dot => {
+  dot.addEventListener("click", () => {
+    const targetIndex = Number(dot.dataset.index);
+    if (targetIndex === currentScene) return;
+
+    const direction = targetIndex > currentScene ? 1 : -1;
+    showScene(targetIndex, direction);
+  });
+});
+
 
 
