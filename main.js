@@ -1,3 +1,55 @@
+/* ---------------- particle initializer ---------------- */
+
+particlesJS("background", {
+  particles: {
+    number: {
+      value: 120,
+      density: {
+        enable: true,
+        value_area: 1000
+      }
+    },
+    color: {
+      value: "#ffffff"
+    },
+    shape: {
+      type: "circle"
+    },
+    opacity: {
+      value: 0.5,
+      random: true
+    },
+    size: {
+      value: 2,
+      random: true
+    },
+    line_linked: {
+      enable: false
+    },
+    move: {
+      enable: true,
+      speed: 0.3,
+      direction: "none",
+      random: true,
+      straight: false,
+      out_mode: "out"
+    }
+  },
+  interactivity: {
+    detect_on: "window",
+    events: {
+      onhover: {
+        enable: false
+      },
+      onclick: {
+        enable: false
+      },
+      resize: true
+    }
+  },
+  retina_detect: true
+});
+
 /* ---------------- DATA LOADING ---------------- */
 
 fetch("data/projects.json")
@@ -72,12 +124,15 @@ function showScene(index, direction) {
 }
 
 window.addEventListener("wheel", e => {
-  if (isAnimating) return;
+    e.preventDefault();
+    if (isAnimating) return;
 
-  if (e.deltaY > 0) {
-    showScene(currentScene + 1, 1);
-  } else {
-    showScene(currentScene - 1, -1);
-  }
-});
+    if (e.deltaY > 0) {
+      showScene(currentScene + 1, 1);
+    } else {
+      showScene(currentScene - 1, -1);
+    }
+  },
+  { passive: false}
+);
 

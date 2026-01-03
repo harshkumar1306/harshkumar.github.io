@@ -16,12 +16,12 @@ body {
 /* BACKGROUND CANVAS */
 #background {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   z-index: 0;
+  background: radial-gradient(circle at bottom, #0a0f2c, #020308);
+  pointer-events: none;
 }
+
 
 /* APP WRAPPER */
 #app {
