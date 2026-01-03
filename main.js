@@ -1,4 +1,4 @@
-/* ---------------- particle initializer ---------------- */
+/* ================= PARTICLES BACKGROUND ================= */
 
 particlesJS("background", {
   particles: {
@@ -9,12 +9,8 @@ particlesJS("background", {
         value_area: 1000
       }
     },
-    color: {
-      value: "#ffffff"
-    },
-    shape: {
-      type: "circle"
-    },
+    color: { value: "#ffffff" },
+    shape: { type: "circle" },
     opacity: {
       value: 0.5,
       random: true
@@ -23,9 +19,7 @@ particlesJS("background", {
       value: 2,
       random: true
     },
-    line_linked: {
-      enable: false
-    },
+    line_linked: { enable: false },
     move: {
       enable: true,
       speed: 0.3,
@@ -38,24 +32,22 @@ particlesJS("background", {
   interactivity: {
     detect_on: "window",
     events: {
-      onhover: {
-        enable: false
-      },
-      onclick: {
-        enable: false
-      },
+      onhover: { enable: false },
+      onclick: { enable: false },
       resize: true
     }
   },
   retina_detect: true
 });
 
-/* ---------------- DATA LOADING ---------------- */
+/* ================= DATA LOADING ================= */
 
 fetch("data/projects.json")
   .then(res => res.json())
   .then(projects => {
     const container = document.getElementById("projects-container");
+    if (!container) return;
+
     projects.forEach(project => {
       const card = document.createElement("div");
       card.className = "card";
@@ -72,6 +64,8 @@ fetch("data/tools.json")
   .then(res => res.json())
   .then(tools => {
     const container = document.getElementById("tools-container");
+    if (!container) return;
+
     tools.forEach(tool => {
       const li = document.createElement("li");
       li.textContent = tool;
@@ -79,24 +73,32 @@ fetch("data/tools.json")
     });
   });
 
-/* ---------------- SCENE SWITCHING ---------------- */
+/* ================= SCENE SWITCHING ================= */
 
-const scenes = document.querySelectorAll(".scene");
-const navDots = document.querySelectorAll(".scene-nav .dot");
+const scenes = Array.from(document.querySelectorAll(".scene"));
+const navDots = Array.from(document.querySelectorAll(".scene-nav .dot"));
 
 let currentScene = 0;
 let isAnimating = false;
 
-function showScene(index, direction) {
-  if (isAnimating || index < 0 || index >= scenes.length) return;
+function showScene(targetIndex) {
+  if (
+    isAnimating ||
+    targetIndex === currentScene ||
+    targetIndex < 0 ||
+    targetIndex >= scenes.length
+  ) {
+    return;
+  }
 
   isAnimating = true;
 
-  navDots.forEach(dot => dot.classList.remove("active"));
-  navDots[index].classList.add("active");
-
   const current = scenes[currentScene];
-  const next = scenes[index];
+  const next = scenes[targetIndex];
+
+  // Update nav immediately (no lag)
+  navDots.forEach(dot => dot.classList.remove("active"));
+  navDots[targetIndex]?.classList.add("active");
 
   next.style.display = "block";
 
@@ -104,69 +106,106 @@ function showScene(index, direction) {
     onComplete: () => {
       current.classList.remove("active");
       current.style.display = "none";
+
       next.classList.add("active");
-      currentScene = index;
+      currentScene = targetIndex;
       isAnimating = false;
     }
   });
 
-  // OUTGOING SCENE
+  // OUT
   tl.to(current, {
     opacity: 0,
     scale: 0.98,
-    duration: 0.5,
+    duration: 0.45,
     ease: "power2.in"
   });
 
-  // INCOMING SCENE CONTAINER
+  // IN container
   tl.fromTo(
     next,
     { opacity: 0, scale: 1.02 },
-    { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" },
+    { opacity: 1, scale: 1, duration: 0.55, ease: "power2.out" },
     "<"
   );
 
-  // INCOMING TEXT ELEMENTS (STAGGERED)
+  // IN headings
   tl.to(
     next.querySelectorAll("h1, h2"),
     {
       opacity: 1,
       y: 0,
-      duration: 0.6,
-      stagger: 0.1,
+      duration: 0.5,
+      stagger: 0.08,
       ease: "power3.out"
     },
-    "-=0.2"
+    "-=0.25"
   );
 
+  // IN content
   tl.to(
     next.querySelectorAll("p, ul, .cards"),
     {
       opacity: 1,
       y: 0,
-      duration: 0.6,
-      stagger: 0.1,
+      duration: 0.5,
+      stagger: 0.08,
       ease: "power3.out"
     },
-    "-=0.4"
+    "-=0.35"
   );
 }
 
+/* ================= SCROLL INPUT ================= */
 
-window.addEventListener("wheel", e => {
+window.addEventListener(
+  "wheel",
+  e => {
     e.preventDefault();
     if (isAnimating) return;
 
     if (e.deltaY > 0) {
-      showScene(currentScene + 1, 1);
+      showScene(currentScene + 1);
     } else {
-      showScene(currentScene - 1, -1);
+      showScene(currentScene - 1);
     }
   },
-  { passive: false}
+  { passive: false }
 );
 
-// INITIAL ANIMATION
+/* ================= KEYBOARD NAV ================= */
+
+window.addEventListener("keydown", e => {
+  if (isAnimating) return;
+
+  if (e.key === "ArrowDown" || e.key === "PageDown") {
+    showScene(currentScene + 1);
+  }
+
+  if (e.key === "ArrowUp" || e.key === "PageUp") {
+    showScene(currentScene - 1);
+  }
+
+  if (e.key === "Home") {
+    showScene(0);
+  }
+
+  if (e.key === "End") {
+    showScene(scenes.length - 1);
+  }
+});
+
+/* ================= NAV DOT CLICKS ================= */
+
+navDots.forEach(dot => {
+  dot.addEventListener("click", () => {
+    const index = Number(dot.dataset.index);
+    showScene(index);
+  });
+});
+
+/* ================= INITIAL LOAD ANIMATION ================= */
+
 gsap.to(".scene.active h1, .scene.active h2", {
   opacity: 1,
   y: 0,
@@ -178,19 +217,6 @@ gsap.to(".scene.active p", {
   opacity: 1,
   y: 0,
   duration: 0.8,
-  delay: 0.2,
+  delay: 0.15,
   ease: "power3.out"
 });
-
-navDots.forEach(dot => {
-  dot.addEventListener("click", () => {
-    const targetIndex = Number(dot.dataset.index);
-    if (targetIndex === currentScene) return;
-
-    const direction = targetIndex > currentScene ? 1 : -1;
-    showScene(targetIndex, direction);
-  });
-});
-
-
-

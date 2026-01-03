@@ -6,10 +6,13 @@ let mouseY = 0;
 let ringX = 0;
 let ringY = 0;
 
+/* ================= BASIC CURSOR ================= */
+
 document.addEventListener("mousemove", e => {
   mouseX = e.clientX;
   mouseY = e.clientY;
 
+  // dot = instant
   dot.style.transform = `translate(${mouseX - 3}px, ${mouseY - 3}px)`;
 });
 
@@ -23,58 +26,51 @@ function animateRing() {
 
 animateRing();
 
-const magneticElements = document.querySelectorAll(".card");
+/* ================= MAGNETIC CARDS ================= */
 
-magneticElements.forEach(el => {
-  el.addEventListener("mousemove", e => {
-    const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
+/**
+ * Cards are injected dynamically,
+ * so this function must be callable after render
+ */
+function bindMagneticCards() {
+  const cards = document.querySelectorAll(".card");
 
-    gsap.to(el, {
-      x: x * 0.15,
-      y: y * 0.15,
-      duration: 0.3,
-      ease: "power3.out"
+  cards.forEach(card => {
+    if (card.dataset.magneticBound) return;
+    card.dataset.magneticBound = "true";
+
+    card.addEventListener("mousemove", e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      gsap.to(card, {
+        x: x * 0.12,
+        y: y * 0.12,
+        duration: 0.25,
+        ease: "power3.out"
+      });
+    });
+
+    card.addEventListener("mouseleave", () => {
+      gsap.to(card, {
+        x: 0,
+        y: 0,
+        duration: 0.35,
+        ease: "power3.out"
+      });
     });
   });
+}
 
-  el.addEventListener("mouseleave", () => {
-    gsap.to(el, {
-      x: 0,
-      y: 0,
-      duration: 0.4,
-      ease: "power3.out"
-    });
-  });
-});
+/* ================= OBSERVE DOM CHANGES ================= */
 
-// magneticElements.forEach(el => {
-//   el.addEventListener("mouseenter", () => {
-//     ring.style.transform += " scale(1.4)";
-//   });
+/**
+ * Ensures magnetic effect applies
+ * even after projects load dynamically
+ */
+const observer = new MutationObserver(bindMagneticCards);
+observer.observe(document.body, { childList: true, subtree: true });
 
-//   el.addEventListener("mouseleave", () => {
-//     ring.style.transform = ring.style.transform.replace(" scale(1.4)", "");
-//   });
-// });
-
-magneticElements.forEach(el => {
-  el.addEventListener("mouseenter", () => {
-    gsap.to(ring, {
-      scale: 1.4,
-      duration: 0.3,
-      ease: "power2.out"
-    });
-  });
-
-  el.addEventListener("mouseleave", () => {
-    gsap.to(ring, {
-      scale: 1,
-      duration: 0.3,
-      ease: "power2.out"
-    });
-  });
-});
-
-
+// Initial bind
+bindMagneticCards();
