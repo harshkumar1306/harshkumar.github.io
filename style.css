@@ -1,0 +1,89 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BASE */
+body {
+  font-family: system-ui, sans-serif;
+  background: #050505;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+/* BACKGROUND CANVAS */
+#background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+}
+
+/* APP WRAPPER */
+#app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+/* SCENES */
+.scene {
+  position: absolute;
+  inset: 0;
+  display: none;
+  padding: 6rem;
+}
+
+.scene.active {
+  display: block;
+}
+
+/* HERO */
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero h1 {
+  font-size: 4rem;
+}
+
+.hero p {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+/* PROJECT CARDS */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.card {
+  padding: 2rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+}
+
+/* TOOLS */
+.tools-list {
+  margin-top: 2rem;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  gap: 1rem 2rem;
+}
+
+/* CONTACT */
+.contact p {
+  margin-top: 1rem;
+}
