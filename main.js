@@ -95,33 +95,58 @@ function showScene(index, direction) {
 
   next.style.display = "block";
 
-  gsap.fromTo(
-    next,
-    { opacity: 0, y: direction * 80 },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-      ease: "power2.out"
-    }
-  );
-
-  gsap.to(current, {
-    opacity: 0,
-    y: -direction * 80,
-    duration: 0.6,
-    ease: "power2.in",
+  const tl = gsap.timeline({
     onComplete: () => {
       current.classList.remove("active");
       current.style.display = "none";
-      current.style.opacity = 1;
-      current.style.transform = "translateY(0)";
       next.classList.add("active");
       currentScene = index;
       isAnimating = false;
     }
   });
+
+  // OUTGOING SCENE
+  tl.to(current, {
+    opacity: 0,
+    scale: 0.98,
+    duration: 0.5,
+    ease: "power2.in"
+  });
+
+  // INCOMING SCENE CONTAINER
+  tl.fromTo(
+    next,
+    { opacity: 0, scale: 1.02 },
+    { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" },
+    "<"
+  );
+
+  // INCOMING TEXT ELEMENTS (STAGGERED)
+  tl.to(
+    next.querySelectorAll("h1, h2"),
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: "power3.out"
+    },
+    "-=0.2"
+  );
+
+  tl.to(
+    next.querySelectorAll("p, ul, .cards"),
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: "power3.out"
+    },
+    "-=0.4"
+  );
 }
+
 
 window.addEventListener("wheel", e => {
     e.preventDefault();
@@ -135,4 +160,21 @@ window.addEventListener("wheel", e => {
   },
   { passive: false}
 );
+
+// INITIAL ANIMATION
+gsap.to(".scene.active h1, .scene.active h2", {
+  opacity: 1,
+  y: 0,
+  duration: 0.8,
+  ease: "power3.out"
+});
+
+gsap.to(".scene.active p", {
+  opacity: 1,
+  y: 0,
+  duration: 0.8,
+  delay: 0.2,
+  ease: "power3.out"
+});
+
 

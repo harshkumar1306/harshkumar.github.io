@@ -139,4 +139,19 @@ body {
   z-index: 9998;
 }
 
+/* SCENE ELEMENT DEFAULT STATES */
+.scene h1,
+.scene h2 {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.scene p,
+.scene ul,
+.scene .cards {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+
 
