@@ -1,9 +1,10 @@
 [
-  "C / C++",
-  "JavaScript",
-  "Arduino",
-  "CAD Design",
-  "Linux",
+  "C / C++ (Embedded)",
+  "JavaScript (Web)",
+  "Arduino & Microcontrollers",
+  "Linux (CLI, Filesystems)",
+  "Basic Networking (LAN, SSH)",
   "Git & GitHub",
-  "Basic Networking"
+  "CAD Design (Mechanical)"
 ]
+
