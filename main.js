@@ -49,8 +49,12 @@ fetch("data/projects.json")
     if (!container) return;
 
     projects.forEach(project => {
-      const card = document.createElement("div");
+      const card = document.createElement("a");
       card.className = "card";
+      card.href = project.link;
+      card.target = "_blank";
+      card.rel = "noopener noreferrer";
+
       card.innerHTML = `
         <h3>${project.title}</h3>
         <p>${project.description}</p>
@@ -116,8 +120,8 @@ function showScene(targetIndex) {
   // OUT
   tl.to(current, {
     opacity: 0,
-    scale: 0.98,
-    duration: 0.45,
+    scale: 0.995,
+    duration: 0.35,
     ease: "power2.in"
   });
 
@@ -125,7 +129,7 @@ function showScene(targetIndex) {
   tl.fromTo(
     next,
     { opacity: 0, scale: 1.02 },
-    { opacity: 1, scale: 1, duration: 0.55, ease: "power2.out" },
+    { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" },
     "<"
   );
 
@@ -136,7 +140,7 @@ function showScene(targetIndex) {
       opacity: 1,
       y: 0,
       duration: 0.5,
-      stagger: 0.08,
+      stagger: 0.05,
       ease: "power3.out"
     },
     "-=0.25"
@@ -149,7 +153,7 @@ function showScene(targetIndex) {
       opacity: 1,
       y: 0,
       duration: 0.5,
-      stagger: 0.08,
+      stagger: 0.05,
       ease: "power3.out"
     },
     "-=0.35"
