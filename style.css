@@ -5,6 +5,22 @@
   box-sizing: border-box;
 }
 
+/* ================= GLOBAL CSS VARIABLES ================= */
+
+:root {
+  --bg-main: #050505;
+  --bg-glass: rgba(255, 255, 255, 0.04);
+
+  --border-soft: rgba(255, 255, 255, 0.08);
+
+  --text-main: #e6e6e6;
+  --text-muted: rgba(230, 230, 230, 0.7);
+
+  /* Muted accent (can be changed later) */
+  --accent: #8fa9b3;
+}
+
+
 /* ================= BASE ================= */
 html, body {
   height: 100%;
@@ -13,8 +29,8 @@ html, body {
 
 body {
   font-family: system-ui, sans-serif;
-  background: #050505;
-  color: #ffffff;
+  background: var(--bg-main);
+  color: var(--text-main);
   cursor: none;
 }
 
@@ -38,10 +54,18 @@ body {
 /* ================= SCENES ================= */
 .scene {
   position: absolute;
-  inset: 0;
+  inset: 3rem;
   display: none;
-  padding: 6rem;
+  padding: 4rem;
+
+  background: var(--bg-glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1px solid var(--border-soft);
+  border-radius: 24px;
 }
+
 
 .scene.active {
   display: block;
@@ -63,6 +87,15 @@ body {
   font-size: 1.2rem;
   opacity: 0.8;
 }
+
+h1, h2 {
+  letter-spacing: -0.02em;
+}
+
+p {
+  color: var(--text-muted);
+}
+
 
 /* ================= PROJECTS ================= */
 .cards {
