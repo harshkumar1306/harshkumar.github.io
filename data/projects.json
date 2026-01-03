@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Drone Obstacle Avoidance",
+    "category": "UAV",
+    "description": "Autonomous obstacle detection using ultrasonic sensors",
+    "tech": ["Arduino", "C++", "Sensors"]
+  },
+  {
+    "title": "DIY NAS Server",
+    "category": "Systems",
+    "description": "Personal cloud storage with remote access",
+    "tech": ["Linux", "Networking"]
+  },
+  {
+    "title": "Virtual Herbal Garden",
+    "category": "Web + 3D",
+    "description": "Interactive 3D learning platform",
+    "tech": ["JavaScript", "WebGL", "Three.js"]
+  }
+]
