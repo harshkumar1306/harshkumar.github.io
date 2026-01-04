@@ -17,8 +17,10 @@ document.addEventListener("mousemove", e => {
 });
 
 function animateRing() {
-  ringX += (mouseX - ringX) * 0.12;
-  ringY += (mouseY - ringY) * 0.12;
+  // ringX += (mouseX - ringX) * 0.12;
+  // ringY += (mouseY - ringY) * 0.12;
+  ringX += (mouseX - ringX) * 0.075;
+  ringY += (mouseY - ringY) * 0.075;
 
   ring.style.transform = `translate(${ringX - 18}px, ${ringY - 18}px)`;
   requestAnimationFrame(animateRing);

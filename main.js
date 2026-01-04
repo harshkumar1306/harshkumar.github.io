@@ -91,13 +91,24 @@ function showScene(targetIndex) {
     "<"
   );
 
+  // RESET incoming scene elements
+  gsap.set(next.querySelectorAll("h1, h2"), {
+    opacity: 0,
+    y: 40
+  });
+
+  gsap.set(next.querySelectorAll("p, ul, .cards"), {
+    opacity: 0,
+    y: 30
+  });
+
   // IN headings
   tl.to(
     next.querySelectorAll("h1, h2"),
     {
       opacity: 1,
       y: 0,
-      duration: 0.5,
+      duration: 0.45,
       stagger: 0.05,
       ease: "power3.out"
     },
@@ -110,13 +121,14 @@ function showScene(targetIndex) {
     {
       opacity: 1,
       y: 0,
-      duration: 0.5,
+      duration: 0.45,
       stagger: 0.05,
       ease: "power3.out"
     },
     "-=0.35"
   );
-}
+  }
+
 
 /* ================= SCROLL INPUT ================= */
 
