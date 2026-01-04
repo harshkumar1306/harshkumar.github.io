@@ -41,7 +41,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: 0;
-  background: radial-gradient(circle at bottom, #0a0f2c, #020308);
+  background: radial-gradient(circle at center, #050505, #000000 70%);
   pointer-events: none;
 }
 
@@ -60,8 +60,6 @@ body {
   display: none;
   padding: 6rem;
 }
-
-
 
 .scene.active {
   display: block;
@@ -269,4 +267,12 @@ p {
 .scene-nav .dot.active {
   background: white;
   transform: scale(1.4);
+}
+
+#starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
 }
