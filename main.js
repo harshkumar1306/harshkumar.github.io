@@ -187,3 +187,124 @@ gsap.to(".scene.active p", {
   delay: 0.15,
   ease: "power3.out"
 });
+
+/* ================= HERO TYPING (SCENE AWARE) ================= */
+const heroText = "Computer Science Student | Drone Enthusiast | CAD Designer";
+const typingTarget = document.getElementById("typing-text");
+
+let typingIndex = 0;
+let typingInterval = null;
+
+function startHeroTyping() {
+  if (!typingTarget) return;
+
+  // Reset
+  clearInterval(typingInterval);
+  typingTarget.textContent = "";
+  typingIndex = 0;
+
+  typingInterval = setInterval(() => {
+    if (typingIndex < heroText.length) {
+      typingTarget.textContent =
+        heroText.slice(0, typingIndex + 1) + " |";
+      typingIndex++;
+    } else {
+      clearInterval(typingInterval);
+      typingTarget.textContent = heroText; // remove cursor at end
+    }
+  }, 50);
+}
+
+/* Hook into scene changes */
+const originalShowScene = showScene;
+
+showScene = function (index) {
+  originalShowScene(index);
+
+  // Hero scene is index 0
+  if (index === 0) {
+    setTimeout(startHeroTyping, 500);
+  }
+};
+
+// Initial load
+setTimeout(startHeroTyping, 900);
+
+
+/* ================= ABOUT QUOTE CIPHER ================= */
+const quotes = [
+  "Simplicity is the soul of efficiency. — Austin Freeman",
+  "Programs must be written for people to read. — Harold Abelson",
+  "The best systems are built with clarity, not complexity.",
+  "Engineering is about trade-offs, not perfection."
+];
+
+const quoteElement = document.getElementById("quote-text");
+let quoteIndex = 0;
+let cipherInterval = null;
+let activeCipher = false;
+const cipherChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%";
+
+function cipherText(targetText, duration = 900) {
+  if (!quoteElement) return;
+
+  const startTime = performance.now();
+  activeCipher = true;
+
+  function animate(time) {
+    const progress = Math.min((time - startTime) / duration, 1);
+    let output = "";
+
+    for (let i = 0; i < targetText.length; i++) {
+      if (i < progress * targetText.length) {
+        output += targetText[i];
+      } else {
+        output += cipherChars[Math.floor(Math.random() * cipherChars.length)];
+      }
+    }
+
+    quoteElement.textContent = output;
+
+    if (progress < 1 && activeCipher) {
+      requestAnimationFrame(animate);
+    } else {
+      quoteElement.textContent = targetText;
+    }
+  }
+
+  requestAnimationFrame(animate);
+}
+
+function startQuoteCycle() {
+  if (!quoteElement || cipherInterval) return;
+
+  cipherText(quotes[quoteIndex]);
+
+  cipherInterval = setInterval(() => {
+    quoteIndex = (quoteIndex + 1) % quotes.length;
+    cipherText(quotes[quoteIndex]);
+  }, 4200);
+}
+
+function stopQuoteCycle() {
+  activeCipher = false;
+  clearInterval(cipherInterval);
+  cipherInterval = null;
+}
+
+/* Hook into scene switching */
+const originalShowSceneForQuotes = showScene;
+
+showScene = function (index) {
+  originalShowSceneForQuotes(index);
+
+  // About scene index = 1
+  if (index === 1) {
+    startQuoteCycle();
+  } else {
+    stopQuoteCycle();
+  }
+};
+
+
+

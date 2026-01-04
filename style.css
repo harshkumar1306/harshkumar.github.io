@@ -70,11 +70,59 @@ body {
   max-width: 720px;
 }
 
+/* ================= HERO TEXT ================= */
+.hero-intro {
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  /* text-transform: uppercase; */
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+  margin-left: 0.25rem;
+}
+
+.hero-name {
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+
+  background: linear-gradient(
+    120deg,
+    #aacbff,
+    #9adcff,
+    #c3a8ff,
+    #f2e6d8
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-name .first-name {
+  display: block;
+  font-size: 5.2rem;
+}
+
+.hero-name .last-name {
+  display: block;
+  font-size: 5.2rem;
+  margin-left: 4rem; /* indent */
+}
+
+
+.hero-typing {
+  font-size: 1rem;
+  color: var(--text-muted);
+  min-height: 1.4em; /* prevents layout jump later */
+  margin-left: 0.25rem;
+}
+
+
 .hero-sub {
   margin-top: 1.5rem;
   max-width: 560px;
   font-size: 0.95rem;
   color: var(--text-muted);
+  margin-left: 0.25rem;
 }
 
 .hero h1 {
@@ -284,3 +332,38 @@ p {
   z-index: 0;
   pointer-events: none;
 }
+
+/* ================= ABOUT SECTION ================= */
+.about h2 {
+  margin-bottom: 1rem;
+}
+
+.section-divider {
+  width: 100%;
+  height: 1px;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  margin-bottom: 2.5rem;
+}
+
+.about-layout {
+  display: grid;
+  grid-template-columns: 25% 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* Left column: quotes */
+.about-quotes {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  opacity: 0.85;
+}
+
+/* Right column: content */
+.about-content p {
+  margin-bottom: 1.4rem;
+  max-width: 640px;
+}
+
