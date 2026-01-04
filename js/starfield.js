@@ -20,11 +20,21 @@ const stars = [];
 function initStars() {
   stars.length = 0;
   for (let i = 0; i < STAR_COUNT; i++) {
+    // stars.push({
+    //   x: Math.random() * width,
+    //   y: Math.random() * height,
+    //   radius: Math.random() * 1.2 + 0.3,
+    //   alpha: Math.random() * 0.5 + 0.3
+    // });
     stars.push({
       x: Math.random() * width,
       y: Math.random() * height,
       radius: Math.random() * 1.2 + 0.3,
-      alpha: Math.random() * 0.5 + 0.3
+      alpha: Math.random() * 0.5 + 0.3,
+
+      // subtle drift
+      vx: (Math.random() - 0.5) * 0.05,
+      vy: (Math.random() - 0.5) * 0.05
     });
   }
 }
@@ -40,6 +50,20 @@ function drawStars() {
   });
   ctx.globalAlpha = 1;
 }
+
+function updateStars() {
+  stars.forEach(star => {
+    star.x += star.vx;
+    star.y += star.vy;
+
+    // wrap around edges
+    if (star.x < 0) star.x = width;
+    if (star.x > width) star.x = 0;
+    if (star.y < 0) star.y = height;
+    if (star.y > height) star.y = 0;
+  });
+}
+
 
 /* ================= SHOOTING STAR CLASS ================= */
 
@@ -146,7 +170,7 @@ function animate() {
   ctx.clearRect(0, 0, width, height);
   ctx.globalCompositeOperation = "source-over";
 
-
+  updateStars();
   drawStars();
 
   for (let i = shootingStars.length - 1; i >= 0; i--) {
