@@ -1,5 +1,4 @@
 /* ================= DATA LOADING ================= */
-
 fetch("data/projects.json")
   .then(res => res.json())
   .then(projects => {
@@ -36,7 +35,6 @@ fetch("data/tools.json")
   });
 
 /* ================= SCENE SWITCHING ================= */
-
 const scenes = Array.from(document.querySelectorAll(".scene"));
 const navDots = Array.from(document.querySelectorAll(".scene-nav .dot"));
 
@@ -129,9 +127,7 @@ function showScene(targetIndex) {
   );
   }
 
-
 /* ================= SCROLL INPUT ================= */
-
 window.addEventListener(
   "wheel",
   e => {
@@ -148,7 +144,6 @@ window.addEventListener(
 );
 
 /* ================= KEYBOARD NAV ================= */
-
 window.addEventListener("keydown", e => {
   if (isAnimating) return;
 
@@ -170,7 +165,6 @@ window.addEventListener("keydown", e => {
 });
 
 /* ================= NAV DOT CLICKS ================= */
-
 navDots.forEach(dot => {
   dot.addEventListener("click", () => {
     const index = Number(dot.dataset.index);
@@ -179,7 +173,6 @@ navDots.forEach(dot => {
 });
 
 /* ================= INITIAL LOAD ANIMATION ================= */
-
 gsap.to(".scene.active h1, .scene.active h2", {
   opacity: 1,
   y: 0,

@@ -6,7 +6,6 @@
 }
 
 /* ================= GLOBAL CSS VARIABLES ================= */
-
 :root {
   --bg-main: #050505;
 
@@ -20,8 +19,6 @@
 
   --accent: #8fa9b3;
 }
-
-
 
 /* ================= BASE ================= */
 html, body {
@@ -73,6 +70,13 @@ body {
   max-width: 720px;
 }
 
+.hero-sub {
+  margin-top: 1.5rem;
+  max-width: 560px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
 .hero h1 {
   font-size: 3.2rem;
   font-weight: 500;
@@ -93,7 +97,6 @@ h1, h2 {
 p {
   color: var(--text-muted);
 }
-
 
 /* ================= PROJECTS ================= */
 .cards {
@@ -165,7 +168,12 @@ p {
   opacity: 0.4;
 }
 
-
+.section-intro {
+  max-width: 640px;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
 
 /* ================= TOOLS ================= */
 .tools-list {
@@ -197,7 +205,6 @@ p {
   border-color: rgba(255, 255, 255, 0.18);
   color: var(--text-main);
 }
-
 
 /* ================= CONTACT ================= */
 .contact p {
@@ -241,6 +248,7 @@ p {
   border-radius: 50%;
   pointer-events: none;
   z-index: 19;
+  will-change: transform;
 }
 
 /* ================= SCENE NAV ================= */

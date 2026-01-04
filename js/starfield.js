@@ -4,7 +4,6 @@ const ctx = canvas.getContext("2d");
 let width, height;
 
 /* ================= CANVAS SETUP ================= */
-
 function resize() {
   width = canvas.width = window.innerWidth;
   height = canvas.height = window.innerHeight;
@@ -13,19 +12,12 @@ window.addEventListener("resize", resize);
 resize();
 
 /* ================= BACKGROUND STARS ================= */
-
 const STAR_COUNT = 180;
 const stars = [];
 
 function initStars() {
   stars.length = 0;
   for (let i = 0; i < STAR_COUNT; i++) {
-    // stars.push({
-    //   x: Math.random() * width,
-    //   y: Math.random() * height,
-    //   radius: Math.random() * 1.2 + 0.3,
-    //   alpha: Math.random() * 0.5 + 0.3
-    // });
     stars.push({
       x: Math.random() * width,
       y: Math.random() * height,
@@ -64,9 +56,7 @@ function updateStars() {
   });
 }
 
-
 /* ================= SHOOTING STAR CLASS ================= */
-
 class ShootingStar {
   constructor() {
     // Spawn outside viewport
@@ -96,12 +86,6 @@ class ShootingStar {
     this.maxLife = 24 + Math.random() * 10;
     this.length = 220 + Math.random() * 200;
 
-    // const palette = [
-    //   [180, 200, 255],
-    //   [200, 180, 255],
-    //   [150, 220, 255],
-    //   [255, 255, 255]
-    // ];
     const palette = [
       [170, 200, 255], // cool blue
       [190, 170, 255], // violet
@@ -154,7 +138,6 @@ class ShootingStar {
 }
 
 /* ================= SHOOTING STAR SYSTEM ================= */
-
 const shootingStars = [];
 const SHOOTING_STAR_PROBABILITY = 0.005;
 
@@ -165,7 +148,6 @@ function maybeSpawnShootingStar() {
 }
 
 /* ================= MAIN ANIMATION LOOP ================= */
-
 function animate() {
   ctx.clearRect(0, 0, width, height);
   ctx.globalCompositeOperation = "source-over";

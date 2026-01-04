@@ -7,7 +7,6 @@ let ringX = 0;
 let ringY = 0;
 
 /* ================= BASIC CURSOR ================= */
-
 document.addEventListener("mousemove", e => {
   mouseX = e.clientX;
   mouseY = e.clientY;
@@ -17,10 +16,8 @@ document.addEventListener("mousemove", e => {
 });
 
 function animateRing() {
-  // ringX += (mouseX - ringX) * 0.12;
-  // ringY += (mouseY - ringY) * 0.12;
-  ringX += (mouseX - ringX) * 0.075;
-  ringY += (mouseY - ringY) * 0.075;
+  ringX += (mouseX - ringX) * 0.16;
+  ringY += (mouseY - ringY) * 0.16;
 
   ring.style.transform = `translate(${ringX - 18}px, ${ringY - 18}px)`;
   requestAnimationFrame(animateRing);
@@ -28,12 +25,6 @@ function animateRing() {
 
 animateRing();
 
-/* ================= MAGNETIC CARDS ================= */
-
-/**
- * Cards are injected dynamically,
- * so this function must be callable after render
- */
 function bindMagneticCards() {
   const cards = document.querySelectorAll(".card");
 
@@ -66,11 +57,6 @@ function bindMagneticCards() {
 }
 
 /* ================= OBSERVE DOM CHANGES ================= */
-
-/**
- * Ensures magnetic effect applies
- * even after projects load dynamically
- */
 const observer = new MutationObserver(bindMagneticCards);
 observer.observe(document.body, { childList: true, subtree: true });
 
