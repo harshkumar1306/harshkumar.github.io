@@ -1,26 +1,27 @@
 [
   {
     "id": "real time language translator",
-    "title": "Real Time Language Translator",
+    "title": "Real-Time Language Translator",
     "category": "Web",
-    "description": "Web based application for real time langugae translator.",
+    "description": "Built a web-based system for real-time language translation, focusing on low-latency text processing and clean user interaction. The project involved integrating backend logic with a responsive frontend to handle continuous input and output reliably.",
     "tech": ["Python", "HTML", "CSS", "JavaScript"],
     "link": "https://github.com/harshkumar1306/Real-Time-Translator.git"
   },
   {
     "id": "neural eye",
     "title": "Neural Eye",
-    "category": "Web",
-    "description": "AI based monitoring of endangered species.",
-    "tech": ["Python", "Yolov5"],
+    "category": "AI / Vision",
+    "description": "Developed an AI-based monitoring system to detect and track endangered species using computer vision. The project focused on model inference, detection accuracy, and system-level thinking rather than dataset size or UI polish.",
+    "tech": ["Python", "YOLOv5"],
     "link": "https://github.com/harshkumar1306/NeuralEye.git"
   },
   {
     "id": "notes app",
     "title": "Notes App",
-    "category": "Web",
-    "description": "Basic notes manager app using advanced Java.",
+    "category": "Software",
+    "description": "Implemented a lightweight notes management application in Java with emphasis on data handling, structure, and core application logic. The project strengthened understanding of object-oriented design and application flow.",
     "tech": ["Java"],
     "link": "https://github.com/harshkumar1306/NotesApp.git"
   }
 ]
+
